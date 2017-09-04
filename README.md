@@ -1,0 +1,1 @@
+Library inventory app using Node.js, Express.js, Mongoose, Bower, AngularJS, Bootstrap
