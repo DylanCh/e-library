@@ -1,6 +1,7 @@
 {
-    "name": "e-library",
-    "dependencies": {
-        "angularjs": "latest"
-    }
+  "name": "e-library",
+  "dependencies": {
+    "angularjs": "latest",
+    "bootstrap-css": "latest"
+  }
 }

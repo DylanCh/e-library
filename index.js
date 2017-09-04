@@ -8,6 +8,7 @@ var bodyParse= require('body-parser');
 app.use(cors());
 app.use(bodyParse.json());
 app.use('/public',express.static(__dirname+'/client'));
+app.use('/bower',  express.static(__dirname + '/app/bower_components'));
 
 // TODO: set HTML as view engine
 //app.set('view engine','html');
