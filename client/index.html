@@ -6,7 +6,7 @@
         <script src="App.js"></script>
     </head>
     <body>
-        <div class="container" ng-app="libraryApp" ng-controller="libraryCOntroller">
+        <div class="container" ng-app="libraryApp" ng-controller="libraryController">
             <div class="row form-group">
                 <input type="text" placeholder="Search" class="form-control"/>
                 <div class="radio">
@@ -25,6 +25,9 @@
                 <button class="btn btn-primary form-control" ng-click="search">
                     Search
                 </button>
+            </div>
+            <div class="row">
+                <table class="table"></table>
             </div>
         </div>
     </body>
