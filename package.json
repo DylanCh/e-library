@@ -1,0 +1,19 @@
+{
+  "name": "e-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "*",
+    "bower": "^1.8.0",
+    "cors": "*",
+    "express": "*",
+    "nodemon": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "Hanjun Chen",
+  "license": "ISC"
+}

@@ -1,0 +1,29 @@
+<html>
+    <title>eLibrary</title>
+    <head>
+        <script src="App.js"></script>
+    </head>
+    <body>
+        <div class="container" ng-app="libraryApp" ng-controller="libraryCOntroller">
+            <div class="row form-group">
+                <input type="text" placeholder="Search" class="form-control"/>
+                <div class="radio">
+                    Search by:
+                    <label>
+                        <input type="radio" name="searchBy" value="true" ng-model="isISBN">
+                            ISBN
+                        </input>
+                    </label>
+                    <label>
+                        <input type="radio" name="searchBy" value="false" ng-model="isISBN">
+                            Title
+                        </input>
+                    </label>
+                </div>
+                <button class="btn btn-primary" ng-click="search">
+                    Search
+                </button>
+            </div>
+        </div>
+    </body>
+</html>

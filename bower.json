@@ -1,0 +1,6 @@
+{
+    "name": "e-library",
+    "dependencies": {
+        "angularjs": "latest"
+    }
+}
