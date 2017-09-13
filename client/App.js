@@ -1,7 +1,28 @@
 'use strict';
-var controller = ($scope)=>{
+
+var controller = ($scope,$http)=>{
+    $scope.booksResult=[];
+
+    let searchAll = ()=>{
+        $http.get('/books')
+        .then((response)=>{
+            $scope.booksResult = response.data;
+            console.log($scope.booksResult);
+        },
+        (error)=>{
+            console.warn('Cannot search data',error);
+        });
+    };
+
+    $scope.onlaod = searchAll;
+    $scope.Query = '';
     $scope.isIsbn = true;
-    $scope.search = (query)=>{
+
+    $scope.search = ()=>{
+        console.log('Search button clicked',$scope.Query);
+        if ($scope.Query===''){
+            searchAll();
+        }
         if ($scope.isIsbn===true){
 
         }
@@ -9,9 +30,11 @@ var controller = ($scope)=>{
 
         }
     };
+
+    searchAll();
 };
 
 var app = angular.module('libraryApp',[]);
 
 app.controller('libraryController',
-    ['$scope',controller]);
+    ['$scope','$http',controller]);

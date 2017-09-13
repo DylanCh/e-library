@@ -7,8 +7,9 @@ var librarySchema = new Schema(
        author : {type:String, required: false},
        ISBN : String,
        year: {type:Number, required:false},
-       publisher : {type:String,required:false}
-   } 
+       publisher : {type:String,required:false},
+       "Cover image":{type:String,required:false}
+   } ,{collection:'library'}
 )
 
 module.exports = mongoose.model('library',librarySchema);

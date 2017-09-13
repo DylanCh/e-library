@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 var bodyParse= require('body-parser');
+var dataLayer = require('./dataLayer');
 
 app.use(cors());
 app.use(bodyParse.json());
@@ -20,8 +21,8 @@ app.get(['/'],(req,res)=>{
 
 app.route(['/books'])
 .get((req,res)=>{
-    let isbn = req.query.isbn;
-    let title = req.query.title;
+    let books = dataLayer.getAllBooks();
+    res.json(books);
 });
 
 /**

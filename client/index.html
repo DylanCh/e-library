@@ -5,10 +5,10 @@
         <script src="../bower/angularjs/angular.min.js"></script>
         <script src="App.js"></script>
     </head>
-    <body>
-        <div class="container" ng-app="libraryApp" ng-controller="libraryController">
+    <body ng-app="libraryApp" ng-controller="libraryController" ng-init="onload()">
+        <div class="container">
             <div class="row form-group">
-                <input type="text" placeholder="Search" class="form-control"/>
+                <input type="text" placeholder="Search" class="form-control" ng-model="Query"/>
                 <div class="radio">
                     Search by:
                     <label>
@@ -27,7 +27,11 @@
                 </button>
             </div>
             <div class="row">
-                <table class="table"></table>
+                <table class="table">
+                    <!-- <tr ng-repeat="b in booksResult">
+                        <td>{{b.title}}</td>
+                    </tr> -->
+                </table>
             </div>
         </div>
     </body>
