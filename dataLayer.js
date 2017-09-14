@@ -24,18 +24,29 @@ var getBooks = (title,isbn,author,year)=>{
 
 module.exports.getAllBooks = ()=>{
     // TODO: how to connect to mongodb
-    mongoose.connect('mongodb://localhost:27017',
+    let conn = mongoose.createConnection('mongodb://localhost/e-library',
         (err)=>{
             if (err!==undefined)
                 console.log("MongoDB Connection Error:",err)
         });
     //console.log(mongoose.connection.collections);
     let books = [];
-    librarySchema.find({},(err,docs)=>{
-        if(!err){
-            books =  docs;
-        }
-       else books=[{}]; 
+    // librarySchema.find({},(err,docs)=>{
+    //     if(!err){
+    //         books =  docs;
+    //     }
+    //    else books=[{}]; 
+    // });
+    conn.on('open',()=>{
+        console.dir('Connection established: ',conn.collections)
+    });
+
+    conn.once('on',()=>{
+        mongoose.connection.db.collection('library',(err,collection)=>{
+            collection.find({}).toArray((err,docs)=>{
+                books = docs;
+            });
+        });
     });
     return books;
 };
