@@ -23,7 +23,6 @@ var book2 = {
 };
 
 var book4 = {
-    "_id" : ObjectId("59b7fabe650854c22e575f70"),
     "title" : "Fundamentals of Database Systems",
     "author" : "Ramez Elmasri",
     "ISBN" : "0321369572",
@@ -34,3 +33,27 @@ var book4 = {
 var insertionSuccess = test.insertBook(book1);
 //test.insertBook(book3);
 console.log(insertionSuccess);
+
+/*
+var mongodb = require('mongodb');
+  var MongoClient = mongodb.MongoClient;
+  var mongoUrl = 'mongodb://.....';
+
+ MongoClient.connect(mongoUrl, function(err, db) {
+    if (err) {
+        callback(false);
+    } else {
+        library = db.collection('library');
+
+        var book1 = {
+        ISBN:'0-375-70402-7',
+        author:'Haruki Murakami',
+        title:'Norwegian Wood',
+        year:1987,
+         publisher:'Kodansha'
+        };
+
+        library.insert(book1);
+    }
+});
+*/
