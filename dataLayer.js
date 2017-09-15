@@ -10,12 +10,37 @@ var librarySchema = require('./schema');
 //     }
 // }
 
-/**
- * 
- * @param {*Book} book 
- */
-var insertBook = (book)=>{
-    
+module.exports.insertBook = (book)=>{
+    let isSuccess = false;
+
+    // Type check
+    if (typeof(book)!==typeof({})){
+        throw new Error('Doc to be inserted is not an object');
+    }
+    else console.dir(book);
+
+    let conn = mongoose.createConnection('mongodb://localhost/local',
+        (err)=>{
+
+            if (err!==undefined){
+                console.log("MongoDB Connection Error:",err);
+                return false;
+            }
+        });
+    conn.once('on',()=>{
+        console.log('Connection established');
+        mongoose.connection.db.collection('library',(err,collection)=>{
+            collection.insert(book)
+            .then(()=>{
+                console.log('insertion successful');
+                isSuccess = true;
+            })
+            .catch((err)=>{
+                console.log('Insertion failed');
+            });
+        });
+    });
+    return isSuccess;
 };
 
 var getBooks = (title,isbn,author,year)=>{
