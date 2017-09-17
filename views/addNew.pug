@@ -3,11 +3,10 @@ html
   head
       title eLibrary
       link(href='../bower/bootstrap-css/css/bootstrap.min.css', rel='stylesheet', type='text/css')
-      link(href='./site.css', rel='stylesheet', type='text/css')
+      link(href='/public/site.css', rel='stylesheet', type='text/css')
       script(src='../bower/angularjs/angular.min.js')
       script(src='public/AddNew.js')     
   body(ng-app='addNewApp', ng-controller='addNewController')
-    //div(ng-include="'public/navbar.html'")
     include ../client/navbar.html
     .container
       .form-group
@@ -36,7 +35,7 @@ html
             tr
               td.labelArea Year
               td
-                input.form-control(type='text',name='year')
+                include .././client/YearSelect.html
           #buttonArea
               button.btn.btn-primary.form-control(type='submit' ng-click="submit()") SUBMIT
               button.btn.form-control(type='reset') RESET
