@@ -8,13 +8,13 @@ var routes = require('./routes');
 
 app.use(cors());
 app.use(bodyParse.json());
+app.use(bodyParse.urlencoded({
+    extended:true
+}));
 app.use('/public',express.static(__dirname+'/client'));
 app.use('/bower',  express.static(__dirname + '/app/bower_components'));
 
 app.set('view engine','pug');
-
-// TODO: set HTML as view engine
-//app.set('view engine','html');
 
 app.get(['/'],(req,res)=>{
     res.setHeader('content-type','text/html');
@@ -34,7 +34,8 @@ app.route(['/books/details'])
 });
 
 app.route(['/addNew'])
-.get(routes.addNew);
+.get(routes.addNew)
+.post(routes.postNew);
 
 app.listen(PORT,()=>{
     console.log('listening port ',PORT);

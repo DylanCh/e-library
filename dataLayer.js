@@ -6,25 +6,40 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 const localDB = 'mongodb://localhost/e-library';
 
-module.exports.insertBook = (book)=>{
-    if (typeof(book)!==typeof({})){
-        throw new Error('Doc to be inserted is not an object');
-    }
-    MongoClient.connect(localDB,(err,db)=>{
-        if(err){
-            console.log('Connection failed');
+module.exports.insertBook = (book,res)=>{
+    return new Promise((resolve,reject)=>{
+        let isSuccess = false;
+
+        if (typeof(book)!==typeof({})){
+            resolve(isSuccess);
+            throw new Error('Doc to be inserted is not an object');
         }
-        else{
-            let library = db.collection('library');
-            library.insert(book,(err1,m)=>{
-                if (err1){
-                    console.log('Insertion failed');
-                }
-                else{
-                    console.log('Insertion succeed',m);
-                }
-            });
+
+        else if (Object.keys(book).length<=0){
+            resolve(isSuccess);
+            throw new Error('Doc to be inserted is an empty object');
         }
+
+        MongoClient.connect(localDB,(err,db)=>{
+            if(err){
+                console.log('Connection failed');
+                resolve(isSuccess);
+            }
+            else{
+                let library = db.collection('library');
+                library.insert(book,(err1,m)=>{
+                    if (err1){
+                        console.log('Insertion failed');
+                        resolve(isSuccess);
+                    }
+                    else{
+                        console.log('Insertion succeed',m);
+                        isSuccess=true
+                        resolve(isSuccess);
+                    }
+                });
+            }
+        });
     });
 };
 

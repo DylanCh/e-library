@@ -5,23 +5,38 @@ html
       link(href='../bower/bootstrap-css/css/bootstrap.min.css', rel='stylesheet', type='text/css')
       link(href='./site.css', rel='stylesheet', type='text/css')
       script(src='../bower/angularjs/angular.min.js')
-      script(src='App.js')     
-  body(ng-app='libraryApp', ng-controller='libraryController')
-    div(ng-include="'public/navbar.html'")
+      script(src='public/AddNew.js')     
+  body(ng-app='addNewApp', ng-controller='addNewController')
+    //div(ng-include="'public/navbar.html'")
+    include ../client/navbar.html
     .container
       .form-group
         form(method='post', action='/addNew')
           table.table
             tr
-              td.labelArea
-                label.label Title           
+              td.labelArea Title *
               td
-                input.form-control(type='text', name='title')
+                input.form-control(type='text', name='title',ng-model='title')
             tr
-              td.labelArea
-                label.label ISBN
+              td.labelArea ISBN *
               td
                 input.form-control(type='text', name='ISBN')
+            tr
+              td.labelArea Author *
+              td
+                input.form-control(type='text',name='author')
+            tr
+              td.labelArea Cover Image 
+              td
+                input.form-control(type='text',name='Cover image',placeholder="Paste the image's URL here")
+            tr
+              td.labelArea Publisher
+              td
+                input.form-control(type='text',name='publisher')
+            tr
+              td.labelArea Year
+              td
+                input.form-control(type='text',name='year')
           #buttonArea
-              button.btn.btn-primary.form-control(type='submit') SUBMIT
+              button.btn.btn-primary.form-control(type='submit' ng-click="submit()") SUBMIT
               button.btn.form-control(type='reset') RESET
