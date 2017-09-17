@@ -29,31 +29,9 @@ var book4 = {
     "publisher" : "Addison Wesley"
 };
 
-
-var insertionSuccess = test.insertBook(book1);
-//test.insertBook(book3);
-console.log(insertionSuccess);
-
-/*
-var mongodb = require('mongodb');
-  var MongoClient = mongodb.MongoClient;
-  var mongoUrl = 'mongodb://.....';
-
- MongoClient.connect(mongoUrl, function(err, db) {
-    if (err) {
-        callback(false);
-    } else {
-        library = db.collection('library');
-
-        var book1 = {
-        ISBN:'0-375-70402-7',
-        author:'Haruki Murakami',
-        title:'Norwegian Wood',
-        year:1987,
-         publisher:'Kodansha'
-        };
-
-        library.insert(book1);
-    }
-});
-*/
+//test.insertBook(book1);
+var books =[];
+// test.getAllBooks().then((res,rej)=>{
+//     books = res;
+//     console.log(books);
+// });

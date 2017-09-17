@@ -4,12 +4,14 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 var bodyParse= require('body-parser');
-var dataLayer = require('./dataLayer');
+var routes = require('./routes');
 
 app.use(cors());
 app.use(bodyParse.json());
 app.use('/public',express.static(__dirname+'/client'));
 app.use('/bower',  express.static(__dirname + '/app/bower_components'));
+
+app.set('view engine','pug');
 
 // TODO: set HTML as view engine
 //app.set('view engine','html');
@@ -20,18 +22,19 @@ app.get(['/'],(req,res)=>{
 });
 
 app.route(['/books'])
-.get((req,res)=>{
-    let books = dataLayer.getAllBooks();
-    res.json(books);
-});
+.get(routes.books);
 
 /**
- * Details of the book
+ * Details of the book, for edit/delete
  */
+
 app.route(['/books/details'])
 .get((req,res)=>{
     
 });
+
+app.route(['/addNew'])
+.get(routes.addNew);
 
 app.listen(PORT,()=>{
     console.log('listening port ',PORT);

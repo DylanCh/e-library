@@ -2,10 +2,12 @@
     <title>eLibrary</title>
     <head>
         <link href="../bower/bootstrap-css/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="./site.css" rel="stylesheet" type="text/css">
         <script src="../bower/angularjs/angular.min.js"></script>
         <script src="App.js"></script>
     </head>
     <body ng-app="libraryApp" ng-controller="libraryController" ng-init="onload()">
+        <div ng-include="'./navbar.html'"></div>
         <div class="container">
             <div class="row form-group">
                 <input type="text" placeholder="Search" class="form-control" ng-model="Query"/>
@@ -27,10 +29,25 @@
                 </button>
             </div>
             <div class="row">
-                <table class="table">
-                    <!-- <tr ng-repeat="b in booksResult">
-                        <td>{{b.title}}</td>
-                    </tr> -->
+                <table class="table" ng-show="showBookTable">
+                     <tr ng-repeat="b in booksResult">
+                         <td><img src="{{b['Cover image']}}" class="book-cover" /></td>
+                        <td>
+                            <div>
+                                <p>{{b.title}}</p>
+                                <small><a ng-href="{{'https://en.wikipedia.org/wiki/Special:BookSources/'+b.ISBN}}">Details</a></small>
+                            </div>
+                        </td>
+                        <td>{{b.author}}</td>
+                        <td>{{b.publisher}}</td>
+                        <td>{{b.year}}</td>
+                        <td>
+                            <a ng-href="{{'https://www.amazon.com/s?search-alias=stripbooks&field-isbn='+b.ISBN}}">
+                                Buy Now
+                            </a>
+                        </td>
+                        <td><a href="#">Edit/Delete</a></td>
+                    </tr> 
                 </table>
             </div>
         </div>

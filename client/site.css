@@ -1,0 +1,13 @@
+.book-cover{
+    width: 150px;
+    height: 200px;
+}
+
+td.labelArea {
+    width:30%;
+}
+
+td.labelArea > label{
+    color: black;
+    font-size: 16px;
+}

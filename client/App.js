@@ -2,8 +2,9 @@
 
 var controller = ($scope,$http)=>{
     $scope.booksResult=[];
-
+    $scope.showBookTable = false;
     let searchAll = ()=>{
+        $scope.showBookTable=!$scope.showBookTable;
         $http.get('/books')
         .then((response)=>{
             $scope.booksResult = response.data;

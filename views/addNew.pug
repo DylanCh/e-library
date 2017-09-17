@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+      title eLibrary
+      link(href='../bower/bootstrap-css/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+      link(href='./site.css', rel='stylesheet', type='text/css')
+      script(src='../bower/angularjs/angular.min.js')
+      script(src='App.js')     
+  body(ng-app='libraryApp', ng-controller='libraryController')
+    div(ng-include="'public/navbar.html'")
+    .container
+      .form-group
+        form(method='post', action='/addNew')
+          table.table
+            tr
+              td.labelArea
+                label.label Title           
+              td
+                input.form-control(type='text', name='title')
+            tr
+              td.labelArea
+                label.label ISBN
+              td
+                input.form-control(type='text', name='ISBN')
+          #buttonArea
+              button.btn.btn-primary.form-control(type='submit') SUBMIT
+              button.btn.form-control(type='reset') RESET
