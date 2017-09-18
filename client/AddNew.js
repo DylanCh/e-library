@@ -18,7 +18,7 @@ var addNewController = ($scope)=>{
         //     alert('Enter all required fields');
         if ($scope.addNewForm.$valid)
             $scope.addNewForm.submit();
-
+        else alert('Please check all fields');
     };
 };
 
