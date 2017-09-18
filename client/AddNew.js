@@ -7,14 +7,18 @@ for (let i =1899; i<=new Date().getFullYear();i++){
 }
 
 var addNewController = ($scope)=>{
-    $scope.title = '';
-    $scope.ISBN = '';
-    $scope.author ='';
+    $scope.title ;
+    $scope.ISBN;
+    $scope.author;
     $scope.year;
     $scope.years = years;
     $scope.submit = ()=>{
-        if($scope.title.trim()==='')
-            alert('Enter all required fields');
+        //https://codepen.io/sevilayha/pen/xFcdI
+        // if($scope.title.trim()==='')
+        //     alert('Enter all required fields');
+        if ($scope.addNewForm.$valid)
+            $scope.addNewForm.submit();
+
     };
 };
 

@@ -1,37 +1,41 @@
 'use strict';
 var test = require('./dataLayer');
-var schema = require('./schema');
 
-var book1 = {
-    ISBN:'9781449320317',
-    author:'Jess Chadwick',
-    title:'Programming ASP.NET MVC 4',
-    year:2012,
-    publisher:'O\'Reily'
+const book1 = {
+    title : 'Core Java Volume I--Fundamentals',
+    'Cover image':'https://images-na.ssl-images-amazon.com/images/I/41dHD22LDJL._SX390_BO1,204,203,200_.jpg',
+    publisher:'Prentice Hall',
+    author :'Cay S. Horstmann',
+    ISBN : '0134177304',
+    year :2016,
 };
 
-//var book2 =  new schema(book1);
-//console.dir(book2);
-
-var book2 = {
-    "title" : "Problem Solving with C",
-    "author" : "Jacqueline A Jones",
-    "ISBN" : "1881991482",
-    "Cover image" : "",
-    "year" : 1996,
-    "publisher" : "Scott Jones"
+const book2 = {
+    "title" : "Beginner's Russian",
+    "ISBN" : "0781812518",
+    "author" : "Anna Kudyma",
+    "Cover image" : "https://prodimage.images-bn.com/pimages/9780781812511_p0_v2_s550x406.jpg",
+    "publisher" : "Hippocrene Books, Inc.",
+    "year" : 2010
 };
 
-var book4 = {
-    "title" : "Fundamentals of Database Systems",
-    "author" : "Ramez Elmasri",
-    "ISBN" : "0321369572",
-    "publisher" : "Addison Wesley"
+const book3 = {
+    "title" : "One Thousand and One Nights",
+    "ISBN" : "0192750135",
+    "author" : "",
+    "Cover image" : "https://images-na.ssl-images-amazon.com/images/I/518Nb9heqmL._SY344_BO1,204,203,200_.jpg",
+    "publisher" : "Oxford University Press"
 };
 
-//test.insertBook(book1);
-var books =[];
-// test.getAllBooks().then((res,rej)=>{
-//     books = res;
-//     console.log(books);
-// });
+const books =[book1,book2,book3];
+
+var reset = ()=>{
+    books.forEach(e=>{
+        test.insertBook(e)
+        .then((res,rej)=>{
+            console.log('Inserted: ',res);
+        });
+    });
+};
+
+reset();

@@ -11,6 +11,9 @@ module.exports = {
     postNew : (req,res)=>{
         console.log(req.body);
         let body = req.body;
+        if (body.year!==undefined && body.year!==null){
+            body.year = parseInt(body.year);
+        }
         res.setHeader('content-type','text/html');
         dataLayer.insertBook(body).then(resolve=>{
             console.log('Inserted: ',resolve)

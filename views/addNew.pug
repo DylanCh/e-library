@@ -10,20 +10,20 @@ html
     include ../client/navbar.html
     .container
       .form-group
-        form(method='post', action='/addNew')
+        form(method='post', action='/addNew',name='addNewForm', ng-submit="submit()")
           table.table
             tr
               td.labelArea Title *
               td
-                input.form-control(type='text', name='title',ng-model='title')
+                input.form-control(type='text', name='title',ng-model='title',required=true)
             tr
               td.labelArea ISBN *
               td
-                input.form-control(type='text', name='ISBN')
+                input.form-control(type='text', name='ISBN',ng-model='ISBN',required=true)
             tr
               td.labelArea Author *
               td
-                input.form-control(type='text',name='author')
+                input.form-control(type='text',name='author',required=true)
             tr
               td.labelArea Cover Image 
               td
@@ -37,5 +37,7 @@ html
               td
                 include .././client/YearSelect.html
           #buttonArea
-              button.btn.btn-primary.form-control(type='submit' ng-click="submit()") SUBMIT
-              button.btn.form-control(type='reset') RESET
+            button.btn.btn-primary.form-control(type='submit') SUBMIT
+            button.btn.form-control(type='Reset') RESET
+          #validationError
+            small.alert.alert-danger(ng-show="{{!title.$valid}}") Entry must have a title.

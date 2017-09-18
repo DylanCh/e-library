@@ -6,7 +6,7 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 const localDB = 'mongodb://localhost/e-library';
 
-module.exports.insertBook = (book,res)=>{
+var insertBook = (book,res)=>{
     return new Promise((resolve,reject)=>{
         let isSuccess = false;
 
@@ -43,38 +43,7 @@ module.exports.insertBook = (book,res)=>{
     });
 };
 
-// module.exports.insertBook = (book)=>{
-//     let isSuccess = false;
-
-//     // Type check
-//     if (typeof(book)!==typeof({})){
-//         throw new Error('Doc to be inserted is not an object');
-//     }
-//     else console.dir(book);
-
-//     let conn = mongoose.createConnection('mongodb://localhost/local',
-//         (err)=>{
-
-//             if (err!==undefined){
-//                 console.log("MongoDB Connection Error:",err);
-//                 return false;
-//             }
-//         });
-//     conn.once('on',()=>{
-//         console.log('Connection established');
-//         mongoose.connection.db.collection('library',(err,collection)=>{
-//             collection.insert(book)
-//             .then(()=>{
-//                 console.log('insertion successful');
-//                 isSuccess = true;
-//             })
-//             .catch((err)=>{
-//                 console.log('Insertion failed');
-//             });
-//         });
-//     });
-//     return isSuccess;
-// };
+module.exports.insertBook = insertBook;
 
 var getBooks = (title,isbn,author,year)=>{
     let books = [];
@@ -102,35 +71,6 @@ module.exports.getAllBooks = ()=>{
     });
 };
 
-// module.exports.getAllBooks = ()=>{
-//     // TODO: how to connect to mongodb
-//     let conn = mongoose.createConnection('mongodb://localhost/e-library',
-//         (err)=>{
-//             if (err!==undefined)
-//                 console.log("MongoDB Connection Error:",err)
-//         });
-//     //console.log(mongoose.connection.collections);
-//     let books = [];
-//     // librarySchema.find({},(err,docs)=>{
-//     //     if(!err){
-//     //         books =  docs;
-//     //     }
-//     //    else books=[{}]; 
-//     // });
-//     conn.on('open',()=>{
-//         console.dir('Connection established: ',conn.collections)
-//     });
-
-//     conn.once('on',()=>{
-//         mongoose.connection.db.collection('library',(err,collection)=>{
-//             collection.find({}).toArray((err,docs)=>{
-//                 books = docs;
-//             });
-//         });
-//     });
-//     return books;
-// };
-
 var deleteBook = (title, isbn)=>{
     let deleted = false;
     try{
@@ -148,3 +88,31 @@ var updateBook = (book)=>{
 
 };
 
+// module.exports.reset = (reset)=>{
+//     MongoClient.connect(localDB,(err,db)=>{
+//         if(err){
+//             console.log('Connection failed');
+//         }
+//         console.warn('[WARNING] Going to reset the library database, are you sure? (y/n)');
+//         process.openStdin().addListener('data',d=>{
+//             if (d.toString().trim().toLowerCase()==='y')
+//                 db.collection('library').drop((arg1)=>{
+//                     if (arg1){
+//                         throw new Error('Collection not being able to drop');
+//                     }
+//                     else{
+//                         console.log('Collection dropped');
+//                         reset.forEach(e=>{
+//                             insertBook(e).then((rec)=>{
+//                                 console.log('Inserted:',typeof(rec));
+//                             });
+//                         });
+//                     }
+//                 });
+//             else {
+//                 console.log('database is not dropped');
+//                 process.exit();
+//             }
+//         });
+//     });
+// };
