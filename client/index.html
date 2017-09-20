@@ -3,6 +3,7 @@
     <head>
         <link href="../bower/bootstrap-css/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="./site.css" rel="stylesheet" type="text/css">
+        <link href="./favicon.ico" rel="icon">
         <script src="../bower/angularjs/angular.min.js"></script>
         <script src="App.js"></script>
     </head>
@@ -10,18 +11,19 @@
         <div ng-include="'./navbar.html'"></div>
         <div class="container">
             <div class="row form-group">
-                <input type="text" placeholder="Search" class="form-control" ng-model="Query"/>
+                <!-- Hitting enter key triggers $scope.search() -->
+                <input type="text" placeholder="Search" class="form-control" 
+                    ng-model="Query" ng-keydown="$event.keyCode === 13 && search()"/>
                 <div class="radio">
                     Search by:
                     <label>
-                        <input type="radio" name="searchBy" ng-value="'true'"
-                            ng-checked="isISBN" ng-model="isISBN">
+                        <input type="radio" name="searchBy" ng-model="isIsbn"
+                        ng-value="true">
                             ISBN
                         </input>
                     </label>
                     <label>
-                        <input type="radio" name="searchBy" ng-value="'false'" 
-                            ng-checked="!isISBN" ng-model="isISBN">
+                        <input type="radio" name="searchBy" ng-model="isIsbn" ng-value="false">
                             Title
                         </input>
                     </label>

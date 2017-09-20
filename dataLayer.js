@@ -1,6 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
-var librarySchema = require('./schema');
+//var librarySchema = require('./schema');
 var mongodb = require('mongodb');
 
 var MongoClient = mongodb.MongoClient;
@@ -72,27 +72,29 @@ module.exports.getAllBooks = getAllBooks;
 module.exports.getBooks = (book,resolve)=>{
     let books = [];
     getAllBooks().then(data=>{
-        console.log(data.length);
-        if (Array.prototype.slice.call(arguments).length===0 || Object.keys(book).length===0){
+        if (book===undefined|| Object.keys(book).length===0){
             resolve(data);
         }
         else{
-            if(book.hasOwnProperty('title'))
+            if(book.hasOwnProperty('title')){
                 data.forEach((element)=> {
-                    if(element.title.toLowerCase().indexOf(title)>=0)
+                    if(element.title.toLowerCase().indexOf(book.title.toLowerCase())>=0)
                         books.push(element);
-                }, this);
+                });
+            }
             else if (book.hasOwnProperty('isbn')){
                 data.forEach((element)=> {
-                    if(element.ISBN.toLowerCase().indexOf(isbn)>=0)
+                    if(element.ISBN.toLowerCase().indexOf(book.isbn)>=0)
                         books.push(element);
-                }, this);
+                });
             }
             else{
-                throw new Error('Search query must have either ISBN or ')
+                throw new Error('Search query must have either ISBN or Title');
             }
-            resolve(data);
+            resolve(books);
         }
+    }).catch(error=>{
+        console.log(error);
     });     
 };
 

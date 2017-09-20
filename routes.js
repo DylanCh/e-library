@@ -51,8 +51,12 @@ module.exports = {
     booksByQuery : (req,res)=>{
         let title = req.query.title;
         let isbn = req.query.isbn;
-        dataLayer.getBooks(title,isbn)
-        .then(books=>{
+        let query = {};
+        if (title.trim()==='')
+            query.isbn = isbn;
+        else if (isbn.trim()==='')
+            query.title = title;
+        dataLayer.getBooks(query,books=>{
             res.json(books);
         });
     }
