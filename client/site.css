@@ -9,6 +9,11 @@ td.labelArea {
     font-size: 16px;
 }
 
+.back-top{
+    margin: auto;
+    width: 100%;
+}
+
 #buttonArea > button:disabled {
     color:black;
 }

@@ -52,6 +52,21 @@
                     </tr> 
                 </table>
             </div>
+            <div>
+                <script src="../bower/jquery/dist/jquery.min.js"></script>
+                <script>
+                    jQuery(document).ready(()=>{
+                        jQuery.noConflict();
+                        let $= jQuery;
+                        $('#backTop').click(event=>{
+                            event.preventDefault();
+                            $('html, body').animate({scrollTop : 0},800);
+                            return false;
+                        });
+                    });
+                </script>
+                <a href="#" class="back-top" id="backTop">Back to Top</a>
+            </div>
         </div>
     </body>
 </html>
