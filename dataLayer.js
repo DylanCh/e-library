@@ -45,16 +45,12 @@ var insertBook = (book,res)=>{
 
 module.exports.insertBook = insertBook;
 
-var getBooks = (title,isbn,author,year)=>{
-    let books = [];
-};
-
-module.exports.getAllBooks = ()=>{
+var getAllBooks = ()=>{
     return new Promise((resolve,reject)=>{
         let books = [];
         MongoClient.connect(localDB,(err,db)=>{
             if(err){
-                console.error('Cannot connect to database');
+                throw new Error('Cannot connect to database');
             }
             else{
                 db.collection('library').find({}).toArray((err1,docs)=>{
@@ -70,6 +66,37 @@ module.exports.getAllBooks = ()=>{
         });
     });
 };
+
+module.exports.getAllBooks = getAllBooks;
+
+module.exports.getBooks = (book,resolve)=>{
+    let books = [];
+    getAllBooks().then(data=>{
+        console.log(data.length);
+        if (Array.prototype.slice.call(arguments).length===0 || Object.keys(book).length===0){
+            resolve(data);
+        }
+        else{
+            if(book.hasOwnProperty('title'))
+                data.forEach((element)=> {
+                    if(element.title.toLowerCase().indexOf(title)>=0)
+                        books.push(element);
+                }, this);
+            else if (book.hasOwnProperty('isbn')){
+                data.forEach((element)=> {
+                    if(element.ISBN.toLowerCase().indexOf(isbn)>=0)
+                        books.push(element);
+                }, this);
+            }
+            else{
+                throw new Error('Search query must have either ISBN or ')
+            }
+            resolve(data);
+        }
+    });     
+};
+
+
 
 var deleteBook = (title, isbn)=>{
     let deleted = false;

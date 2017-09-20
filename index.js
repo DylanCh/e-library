@@ -24,6 +24,9 @@ app.get(['/'],(req,res)=>{
 app.route(['/books'])
 .get(routes.books);
 
+app.route(['/books/search'])
+.get(routes.booksByQuery);
+
 /**
  * Details of the book, for edit/delete
  */

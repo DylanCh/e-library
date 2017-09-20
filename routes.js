@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var dataLayer = require('./dataLayer');
 var pug = require('pug');
 var fs = require('fs');
@@ -16,7 +16,7 @@ module.exports = {
         }
         res.setHeader('content-type','text/html');
         dataLayer.insertBook(body).then(resolve=>{
-            console.log('Inserted: ',resolve)
+            console.log('Inserted: ',resolve);
             let navBar = fs.readFileSync('./client/navbar.html', 'utf8');
             let html = `
             <html>
@@ -45,6 +45,15 @@ module.exports = {
         },
         (err)=>{ 
             console.error('Cannot get data');
-        })
+        });
+    },
+
+    booksByQuery : (req,res)=>{
+        let title = req.query.title;
+        let isbn = req.query.isbn;
+        dataLayer.getBooks(title,isbn)
+        .then(books=>{
+            res.json(books);
+        });
     }
 };

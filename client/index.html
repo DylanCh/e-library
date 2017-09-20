@@ -14,24 +14,26 @@
                 <div class="radio">
                     Search by:
                     <label>
-                        <input type="radio" name="searchBy" value="true" ng-model="isISBN">
+                        <input type="radio" name="searchBy" ng-value="'true'"
+                            ng-checked="isISBN" ng-model="isISBN">
                             ISBN
                         </input>
                     </label>
                     <label>
-                        <input type="radio" name="searchBy" value="false" ng-model="isISBN">
+                        <input type="radio" name="searchBy" ng-value="'false'" 
+                            ng-checked="!isISBN" ng-model="isISBN">
                             Title
                         </input>
                     </label>
                 </div>
-                <button class="btn btn-primary form-control" ng-click="search">
+                <button class="btn btn-primary form-control" ng-click="search()">
                     Search
                 </button>
             </div>
             <div class="row">
                 <table class="table" ng-show="showBookTable">
                      <tr ng-repeat="b in booksResult">
-                         <td><img src="{{b['Cover image']}}" class="book-cover" /></td>
+                         <td><img ng-src="{{b['Cover image']}}" class="book-cover" /></td>
                         <td>
                             <div>
                                 <p>{{b.title}}</p>
