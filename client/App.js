@@ -48,6 +48,16 @@ var controller = ($scope,$http)=>{
             },searchErrorHandler);
         }
     };
+
+    // $scope.edit = (b)=> {
+    //     $http.post('/books/details',b)
+    //     .then((response,status,header,config)=>{
+    //         console.log(response);
+    //         },
+    //         (data, status, headers, config)=>{
+    //             console.log(status);
+    //         });
+    //   };
 };
 
 var app = angular.module('libraryApp',[]);

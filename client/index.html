@@ -48,22 +48,25 @@
                                 Buy Now
                             </a>
                         </td>
-                        <td><a href="#">Edit/Delete</a></td>
+                        <td>
+                            <form method="post" action="/books/details" class="form-inline">
+                                <input type="text" name="title" value="{{b.title}}" hidden/>
+                                <input type="text" name="ISBN" value="{{b.ISBN}}" hidden/>
+                                <input type="text" name="author" value="{{b.author}}" hidden/>
+                                <input type="text" name="year" value="{{b.year}}" hidden/>
+                                <input type="text" name="publisher" value="{{b.publisher}}" hidden/>
+                                <input type="text" name="Cover image" value="{{b['Cover image']}}" hidden/>
+                                <button class="edit-btn btn" type="submit">
+                                    Edit/Delete
+                                </button>
+                            </form>
+                        </td>
                     </tr> 
                 </table>
             </div>
             <div>
                 <script src="../bower/jquery/dist/jquery.min.js"></script>
-                <script>
-                    jQuery(document).ready(()=>{
-                        jQuery.noConflict();
-                        let $= jQuery;
-                        $('#backTop').click(event=>{
-                            event.preventDefault();
-                            $('html, body').animate({scrollTop : 0},800);
-                            return false;
-                        });
-                    });
+                <script src="BackTop.js">    
                 </script>
                 <a href="#" class="back-top" id="backTop">Back to Top</a>
             </div>

@@ -98,8 +98,6 @@ module.exports.getBooks = (book,resolve)=>{
     });     
 };
 
-
-
 var deleteBook = (title, isbn)=>{
     let deleted = false;
     try{
@@ -112,10 +110,28 @@ var deleteBook = (title, isbn)=>{
     return deleted;
 };
 
+var updateBook = (book,updatedBook) => {
+    return new Promise((resolve, reject)=>{
+      MongoClient.connect(localDB,(err,db)=>{
+        if(err){
+          throw new Error('Cannot connect to database');
+        }
+        else{
+          db.collection('library').updateOne({ISBN:book.ISBN},
+              updatedBook,
+              (err1,res)=>{
+                if(err1) 
+                  resolve(false);
+                else resolve(true);
+                db.close();
+              }
+          ); // end updateOne
+        } // end else
+      }); // end mongo connection
+    });// end return promise
+  }; //https://www.w3schools.com/nodejs/nodejs_mongodb_update.asp
 
-var updateBook = (book)=>{
-
-};
+module.exports.updateBook = updateBook;
 
 // module.exports.reset = (reset)=>{
 //     MongoClient.connect(localDB,(err,db)=>{

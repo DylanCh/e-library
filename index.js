@@ -30,11 +30,10 @@ app.route(['/books/search'])
 /**
  * Details of the book, for edit/delete
  */
-
 app.route(['/books/details'])
-.get((req,res)=>{
-    
-});
+.post(routes.edit);
+
+app.post('/editResults', routes.editResults);
 
 app.route(['/addNew'])
 .get(routes.addNew)

@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+      title eLibrary
+      link(href='../bower/bootstrap-css/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+      link(href='/public/site.css', rel='stylesheet', type='text/css')
+      link(href='/public/favicon.ico',rel='icon')
+      script(src='../bower/angularjs/angular.min.js')
+      script(src='/public/App.js') 
+      script(src='/public/Edit.js') 
+  body(ng-app='libraryApp',ng-controller="editController")
+    include ../client/navbar.html
+    .container
+      .form-group
+        form(method='post', action='/editResults',name='editForm', ng-submit="submit()",novalidate=true)
+          table.table
+            tr
+              td.labelArea Title *
+              td
+                input.form-control(type='text', name='title',required=true,value=pageData.title)
+            tr
+              td.labelArea ISBN *
+              td
+                input.form-control(type='text', name='ISBN',disabled=true,value=pageData.ISBN)
+            tr
+              td.labelArea Author *
+              td
+                input.form-control(type='text',name='author',required=true,value=pageData.author)
+            tr
+              td.labelArea Cover Image 
+              td
+                input.form-control(type='text',name='Cover image',placeholder="Paste the image's URL here",value=pageData['Cover image'])
+            tr
+              td.labelArea Publisher
+              td
+                input.form-control(type='text',name='publisher',value=pageData.publisher)
+            tr
+              td.labelArea Year
+              td
+                input.form-control(type='text',name='year', value = pageData.year)
+            
+          #buttonArea
+            button.btn.btn-primary.form-control(type='submit',ng-disabled="addNewForm.$invalid") UPDATE
+            button.btn.btn-danger.form-control DELETE
+            button#cancelBtn.btn.form-control(ng-click="cancelBtn_click") CANCEL
