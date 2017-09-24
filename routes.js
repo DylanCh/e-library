@@ -20,14 +20,18 @@ var deleteRecord = (req,res)=>{
         };
     }
     else {
-        console.log(req.body.headers);
+        console.log('Delete request headers\n',req.body.headers);
         body = req.body;
     }
 
+    console.log(body);
+
     dataLayer.deleteBook(body)
     .then(data=>{
+        console.log('Request is from Ajax?',req.xhr+
+            ', request method:',req.method);
         if (!req.xhr){
-            if (data){
+            if (data===true){
                 res.redirect('/');
             }
             else {

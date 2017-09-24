@@ -39,7 +39,7 @@ app.route(['/addNew'])
 .get(routes.addNew)
 .post(routes.postNew);
 
-app.route(['books/delete','/delete'])
+app.route(['/books/delete','/delete'])
 .get(routes.deleteRecord)
 .post(routes.deleteRecord)
 .delete(routes.deleteRecord);

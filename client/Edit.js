@@ -2,6 +2,8 @@
 
 var toBeDeleted = new Object();
 
+var deleteRecord = ()=>{};
+
 var deleteSuccess = (result)=>{
   if(result.status===true){
     $('.container').html('').prepend(

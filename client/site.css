@@ -26,3 +26,7 @@ td.labelArea {
     border-color: red;
     background-color: pink;
 }
+
+.edit-btn{
+    width:180px;
+}
