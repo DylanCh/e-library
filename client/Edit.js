@@ -1,5 +1,23 @@
 'use strict';
 
+var toBeDeleted = new Object();
+
+var deleteSuccess = (result)=>{
+  if(result.status===true){
+    $('.container').html('').prepend(
+      `<div>Deletion Succeed</div>`
+    );
+  }
+  else{
+    $('#deleteFailed').prop('hidden','false');
+  }
+};
+
+var deleteFail = err=>{
+  console.error(err);
+  $('div#deleteFailed').removeAttr('hidden');
+};
+
 var editController = ($scope,$http)=>{
     $scope.editMode = true;
     $scope.submit = () =>{
@@ -11,11 +29,11 @@ var editController = ($scope,$http)=>{
     $scope.author;
 
     $scope.cancelBtn_click = ()=>{
-      window.location.href = '/';
+      window.history.back();
     };
 
     $scope.deleteRecord=()=>{
-      let toBeDeleted = {
+      toBeDeleted = {
         title: $scope.title,
         ISBN: $scope.ISBN
       };
@@ -38,22 +56,40 @@ var editController = ($scope,$http)=>{
     };
   };
   
-  angular.module('libraryApp')
+angular.module('libraryApp')
   .controller('editController',['$scope','$http',editController]);
 
 jQuery(document).ready(()=>{
   let $ = jQuery;
   $('#deleteBtn').click(event=>{
     event.preventDefault();
-    $.ajax('delete',{
-      method:'DELETE'
-    }).done(result=>{
-      if(result.status){
-        window.location.href = '/'
+
+    toBeDeleted = {
+      title : $('#title').val(),
+      ISBN : $('#ISBN').val()
+    };
+
+    fetch('/delete',{
+      method : 'POST',
+      body : toBeDeleted,
+      headers : {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
-      else{
-        $('#deleteFailed').prop('hidden','false');
+    })
+    .then(result=>{
+      if(result.status!=200){
+        console.log('Request',result.ok);
       }
+      return result.json();
+    })
+    .then(result=>{
+      console.log(result);
+      deleteSuccess(result);
+    })
+    .catch(err=>{
+      deleteFail(err);
     });
   });
 });

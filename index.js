@@ -39,7 +39,9 @@ app.route(['/addNew'])
 .get(routes.addNew)
 .post(routes.postNew);
 
-app.delete(['books/delete','delete'],routes.deleteRecord);
+app.route(['books/delete','delete'])
+.post(routes.deleteRecord)
+.delete(routes.deleteRecord);
 
 app.listen(PORT,()=>{
     console.log('listening port ',PORT);

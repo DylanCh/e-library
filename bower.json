@@ -3,6 +3,7 @@
   "dependencies": {
     "angularjs": "latest",
     "bootstrap-css": "latest",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "fetch": "^2.0.3"
   }
 }

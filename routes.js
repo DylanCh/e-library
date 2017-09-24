@@ -12,34 +12,41 @@ var edit = (req,res)=>{
 };
 
 var deleteRecord = (req,res)=>{
-    console.log(req.body);
+    console.log(req.body.headers);
     dataLayer.deleteBook(req.body)
     .then(data=>{
-        // if (data){
-        //     res.redirect('/');
-        // }
-        // else {
-        //     res.setHeader('content-type','text/html');
-        //     let navBar = fs.readFileSync('./client/navbar.html', 'utf8');
-        //     let html = `
-        //         <html>
-        //         <head>
-        //             <link href="../bower/bootstrap-css/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        //         </head>
-        //         <body>
-        //             <div>${navBar}</div>
-        //             <div>
-        //                 <p>DELETION UNSUCCESSFUL, 
-        //                     <a href="/">
-        //                         GO BACK
-        //                     </a>
-        //                 </p>
-        //             </div>
-        //         </body></html>
-        //     `;
-            
-        // }
-        res.json({status:data});
+        if (!req.xhr){
+            if (data){
+                res.redirect('/');
+            }
+            else {
+                res.setHeader('content-type','text/html');
+                let navBar = fs.readFileSync('./client/navbar.html', 'utf8');
+                let html = `
+                    <html>
+                    <head>
+                        <link href="../bower/bootstrap-css/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+                    </head>
+                    <body>
+                        <div>${navBar}</div>
+                        <div>
+                            <p>DELETION UNSUCCESSFUL, 
+                                <a href="/">
+                                    GO BACK
+                                </a>
+                            </p>
+                        </div>
+                    </body></html>
+                `;
+             res.setHeader('content-type','text/html');
+             res.send(html);   
+            }
+        }
+        else{
+            res.header('Access-Control-Allow-Methods', '*');
+            res.header("Access-Control-Allow-Headers", "X-Requested-With");
+            res.json({status:data});
+        }
     });
 };
 
@@ -51,20 +58,21 @@ var editResults = (req, res) => {
       let navBar = fs.readFileSync('./client/navbar.html', 'utf8');
       res.setHeader('content-type','text/html');
       let message = (data) ? `
-        <div>
+        <div class="row">
           <div class="col-md-3">
             <img src="${book['Cover image']}">
           </div>
-          <div class="col-md-7">
+          <div class="col-md-1"></div>
+          <div class="col-md-6">
             <h3 class="h3">
               ${book.title}
             </h3>
           </div>
-          <ul>
-            <li>ISBN ${book.ISBN}</li>
-            <li>Author: ${book.author}</li>
-            <li>Year: ${book.year}</li>
-            <li>Publisher: ${book.publisher}</li>
+          <ul class="list-group">
+            <li class="list-group-item">ISBN: ${book.ISBN}</li>
+            <li class="list-group-item">Author: ${book.author}</li>
+            <li class="list-group-item">Year: ${book.year}</li>
+            <li class="list-group-item">Publisher: ${book.publisher}</li>
           </ul>
         </div>
       `  : `Sorry, the book ${book.title} was not updated`;

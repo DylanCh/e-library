@@ -7,6 +7,7 @@ html
       link(href='/public/favicon.ico',rel='icon')
       script(src='../bower/angularjs/angular.min.js')
       script(src='../bower/jquery/dist/jquery.min.js')
+      script(src='../bower/fetch/fetch.js')
       script(src='/public/App.js') 
       script(src='/public/Edit.js') 
   body(ng-app='libraryApp',ng-controller="editController")
@@ -18,11 +19,11 @@ html
             tr
               td.labelArea Title *
               td
-                input.form-control(type='text', name='title',required=true,value=pageData.title,ng-bind='title')
+                input#title.form-control(type='text', name='title',required=true,value=pageData.title,ng-bind='title')
             tr
               td.labelArea ISBN *
               td
-                input.form-control(type='text', name='ISBN',disabled=true,value=pageData.ISBN,ng-bind='ISBN')
+                input#ISBN.form-control(type='text', name='ISBN',disabled=true,value=pageData.ISBN,ng-bind='ISBN')
             tr
               td.labelArea Author *
               td
@@ -42,9 +43,11 @@ html
             
           #buttonArea
             button.btn.btn-primary.form-control(type='submit',ng-disabled="addNewForm.$invalid") UPDATE
-            input.btn.btn-danger.form-control(type='button',value='DELETE',id='deleteBtn') 
+            //- form(action='/delete',method='DELETE')
+            //-   input(type='text',hidden=true,name=)
+            //-input.btn.btn-danger.form-control(type='button',value='DELETE',id='deleteBtn') 
             button#cancelBtn.btn.form-control(ng-click="cancelBtn_click()") CANCEL
       .row
         #deleteFailed(hidden=true)
-          p DELETION UNSUCCESSFUL,
+          p DELETION UNSUCCESSFUL,&nbsp;
             a(href='/') GO BACK 
