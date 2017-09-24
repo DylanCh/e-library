@@ -49,17 +49,28 @@
                             </a>
                         </td>
                         <td>
-                            <form method="post" action="/books/details" class="form-inline">
-                                <input type="text" name="title" value="{{b.title}}" hidden/>
-                                <input type="text" name="ISBN" value="{{b.ISBN}}" hidden/>
-                                <input type="text" name="author" value="{{b.author}}" hidden/>
-                                <input type="text" name="year" value="{{b.year}}" hidden/>
-                                <input type="text" name="publisher" value="{{b.publisher}}" hidden/>
-                                <input type="text" name="Cover image" value="{{b['Cover image']}}" hidden/>
-                                <button class="edit-btn btn" type="submit">
-                                    Edit/Delete
-                                </button>
-                            </form>
+                            <div>
+                                <form method="post" action="/books/details" class="form-inline">
+                                    <input type="text" name="title" value="{{b.title}}" hidden/>
+                                    <input type="text" name="ISBN" value="{{b.ISBN}}" hidden/>
+                                    <input type="text" name="author" value="{{b.author}}" hidden/>
+                                    <input type="text" name="year" value="{{b.year}}" hidden/>
+                                    <input type="text" name="publisher" value="{{b.publisher}}" hidden/>
+                                    <input type="text" name="Cover image" value="{{b['Cover image']}}" hidden/>
+                                    <button class="edit-btn btn" type="submit">
+                                        EDIT/DELETE
+                                    </button>
+                                </form>
+                            </div>
+                            <div>
+                                <form method="post" action="/delete" ng-submit="alert('Are you sure?');">
+                                    <fieldset disabled>
+                                        <input type="text" name="title" value="{{b.title}}" hidden/>
+                                        <input type="text" name ="ISBN" value="{{b.ISBN}}" hidden/>
+                                    </fieldset>
+                                    <button class="btn btn-danger" type="submit">DELETE</button>
+                                </form>
+                            </div>
                         </td>
                     </tr> 
                 </table>
