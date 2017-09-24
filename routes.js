@@ -11,6 +11,38 @@ var edit = (req,res)=>{
     );
 };
 
+var deleteRecord = (req,res)=>{
+    console.log(req.body);
+    dataLayer.deleteBook(req.body)
+    .then(data=>{
+        // if (data){
+        //     res.redirect('/');
+        // }
+        // else {
+        //     res.setHeader('content-type','text/html');
+        //     let navBar = fs.readFileSync('./client/navbar.html', 'utf8');
+        //     let html = `
+        //         <html>
+        //         <head>
+        //             <link href="../bower/bootstrap-css/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        //         </head>
+        //         <body>
+        //             <div>${navBar}</div>
+        //             <div>
+        //                 <p>DELETION UNSUCCESSFUL, 
+        //                     <a href="/">
+        //                         GO BACK
+        //                     </a>
+        //                 </p>
+        //             </div>
+        //         </body></html>
+        //     `;
+            
+        // }
+        res.json({status:data});
+    });
+};
+
 var editResults = (req, res) => {
     let book = req.body;
     dataLayer.updateBook({ISBN:book.ISBN},book)
@@ -114,5 +146,6 @@ module.exports = {
     },
 
     edit : edit,
-    editResults : editResults
+    editResults : editResults,
+    deleteRecord: deleteRecord
 };

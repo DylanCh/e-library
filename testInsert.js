@@ -108,6 +108,12 @@ books.push({
     year : 2013
 });
 
+books.push({
+    title:'Test',
+    author:'Test',
+    ISBN:'Test'
+});
+
 var reset = ()=>{
     books.forEach(e=>{
         test.insertBook(e)

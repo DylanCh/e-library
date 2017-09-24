@@ -58,6 +58,7 @@ var getAllBooks = ()=>{
                             throw new Error('SELECT error: ',err1);
                         else {
                             books = docs;
+                            db.close();
                             resolve(books);
                         }
                     }
@@ -98,16 +99,34 @@ module.exports.getBooks = (book,resolve)=>{
     });     
 };
 
-var deleteBook = (title, isbn)=>{
-    let deleted = false;
-    try{
-        // TODO: delete from database
-    }
-    catch (e){
-        console.warn(e);
-        deleted=false;
-    }
-    return deleted;
+module.exports.deleteBook = (book)=>{
+    return new Promise((resolve, reject)=>{
+        console.dir(book);
+        let deleted = false;
+        let title=book.title, isbn = book.isbn;
+        MongoClient.connect(localDB,(err,db)=>{
+            if(err){
+              throw new Error('Cannot connect to database');
+            }
+            else{
+                // TODO: delete from database
+                db.collection('library')
+                .deleteOne({title:title,isbn:isbn},(err1,oldRecord)=>{
+                    if(err1){
+                        db.close();
+                        resolve(false);
+                    }
+                    else {
+                        console.log('Record(s) deleted: ',oldRecord.result.n);
+                        db.close();
+                        if (oldRecord.result.n>0)
+                            deleted = true;
+                        resolve(deleted);
+                    };
+                });
+            }
+        });
+    });
 };
 
 var updateBook = (book,updatedBook) => {

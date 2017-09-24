@@ -21,3 +21,8 @@ td.labelArea {
 #buttonArea > button:disabled:hover{
     color: white;
 }
+
+#deleteFailed{
+    border-color: red;
+    background-color: pink;
+}

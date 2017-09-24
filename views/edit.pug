@@ -6,6 +6,7 @@ html
       link(href='/public/site.css', rel='stylesheet', type='text/css')
       link(href='/public/favicon.ico',rel='icon')
       script(src='../bower/angularjs/angular.min.js')
+      script(src='../bower/jquery/dist/jquery.min.js')
       script(src='/public/App.js') 
       script(src='/public/Edit.js') 
   body(ng-app='libraryApp',ng-controller="editController")
@@ -17,15 +18,15 @@ html
             tr
               td.labelArea Title *
               td
-                input.form-control(type='text', name='title',required=true,value=pageData.title)
+                input.form-control(type='text', name='title',required=true,value=pageData.title,ng-bind='title')
             tr
               td.labelArea ISBN *
               td
-                input.form-control(type='text', name='ISBN',disabled=true,value=pageData.ISBN)
+                input.form-control(type='text', name='ISBN',disabled=true,value=pageData.ISBN,ng-bind='ISBN')
             tr
               td.labelArea Author *
               td
-                input.form-control(type='text',name='author',required=true,value=pageData.author)
+                input.form-control(type='text',name='author',required=true,value=pageData.author,ng-bind='author')
             tr
               td.labelArea Cover Image 
               td
@@ -41,5 +42,9 @@ html
             
           #buttonArea
             button.btn.btn-primary.form-control(type='submit',ng-disabled="addNewForm.$invalid") UPDATE
-            button.btn.btn-danger.form-control DELETE
-            button#cancelBtn.btn.form-control(ng-click="cancelBtn_click") CANCEL
+            input.btn.btn-danger.form-control(type='button',value='DELETE',id='deleteBtn') 
+            button#cancelBtn.btn.form-control(ng-click="cancelBtn_click()") CANCEL
+      .row
+        #deleteFailed(hidden=true)
+          p DELETION UNSUCCESSFUL,
+            a(href='/') GO BACK 
