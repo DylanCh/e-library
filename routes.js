@@ -11,9 +11,20 @@ var edit = (req,res)=>{
     );
 };
 
-var deleteRecord = (req,res)=>{
-    console.log(req.body.headers);
-    dataLayer.deleteBook(req.body)
+var deleteRecord = (req,res)=>{    
+    let body = {};
+    if (req.method==='GET'){
+        body = {
+            title : req.query.title,
+            ISBN : req.query.ISBN
+        };
+    }
+    else {
+        console.log(req.body.headers);
+        body = req.body;
+    }
+
+    dataLayer.deleteBook(body)
     .then(data=>{
         if (!req.xhr){
             if (data){

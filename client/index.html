@@ -63,7 +63,7 @@
                                 </form>
                             </div>
                             <div>
-                                <form method="post" action="/delete" ng-submit="alert('Are you sure?');">
+                                <form method="get" action="/delete" ng-submit="alert('Are you sure?');">
                                     <fieldset disabled>
                                         <input type="text" name="title" value="{{b.title}}" hidden/>
                                         <input type="text" name ="ISBN" value="{{b.ISBN}}" hidden/>
