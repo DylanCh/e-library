@@ -10,7 +10,7 @@ html
   body(ng-app='addNewApp', ng-controller='addNewController')
     include ../client/navbar.html
     .container
-      .form-group(ng-show="editMode")
+      .form-group
         form(method='post', action='/addNew',name='addNewForm', ng-submit="submit()",novalidate=true)
           table.table
             tr

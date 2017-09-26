@@ -7,6 +7,11 @@ var searchErrorHandler = (error)=>{
 var controller = ($scope,$http)=>{
     $scope.booksResult=[];
     $scope.showBookTable = false;
+    $scope.toggleDeleteMessage = sessionStorage.getItem('toggleDeleteMessage');
+
+    $scope.showDeleteMessage = (bool)=>{
+        sessionStorage.setItem('toggleDeleteMessage',bool);
+    };
 
     let searchAll = ()=>{
         $scope.showBookTable=!$scope.showBookTable;
@@ -58,6 +63,12 @@ var controller = ($scope,$http)=>{
     //             console.log(status);
     //         });
     //   };
+
+    $scope.deleteBook = (b)=>{
+        let bookName = (b.title!=undefined) ? b.title : ''; 
+        alert('WARNING: This book '+bookName+' will be deleted. Are you sure?');
+        $scope.showDeleteMessage('t');
+    };
 };
 
 var app = angular.module('libraryApp',[]);

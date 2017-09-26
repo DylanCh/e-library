@@ -8,6 +8,7 @@ var routes = require('./routes');
 
 app.use(cors());
 app.use(bodyParse.json());
+// parse form data
 app.use(bodyParse.urlencoded({
     extended:true
 }));
@@ -33,7 +34,9 @@ app.route(['/books/search'])
 app.route(['/books/details'])
 .post(routes.edit);
 
+// Edit a book
 app.post('/editResults', routes.editResults);
+
 
 app.route(['/addNew'])
 .get(routes.addNew)

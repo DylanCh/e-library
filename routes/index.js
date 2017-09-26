@@ -1,5 +1,5 @@
 'use strict';
-var dataLayer = require('./dataLayer');
+var dataLayer = require('../dataLayer');
 var pug = require('pug');
 var fs = require('fs');
 

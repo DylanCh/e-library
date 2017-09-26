@@ -10,6 +10,10 @@
     <body ng-app="libraryApp" ng-controller="libraryController" ng-init="onload()">
         <div ng-include="'./navbar.html'"></div>
         <div class="container">
+            <div class="alert alert-success alert-dismissable" ng-show="toggleDeleteMessage==='t'">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" ng-click="showDeleteMessage('f')">Got it&times;</a>
+                You deleted a book.
+            </div>
             <div class="row form-group">
                 <!-- Hitting enter key triggers $scope.search() -->
                 <input type="text" placeholder="Search" class="form-control" 
@@ -63,12 +67,15 @@
                                 </form>
                             </div>
                             <div>
-                                <form method="get" action="/delete">
+                                <form method="get" action="/delete" ng-submit="deleteBook(b)">
                                     <fieldset>
                                         <input type="text" name="title" value="{{b.title}}" hidden/>
                                         <input type="text" name ="ISBN" value="{{b.ISBN}}" hidden/>
                                     </fieldset>
                                     <input class="btn btn-danger edit-btn" type="submit" value="DELETE" />
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">Deleting this book</span>
+                                    </div>
                                 </form>
                             </div>
                         </td>

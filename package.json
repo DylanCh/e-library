@@ -10,17 +10,21 @@
     "cors": "*",
     "express": "*",
     "fs": "0.0.1-security",
+    "helmet": "^3.8.1",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.9",
-    "nodemon": "*",
     "path": "^0.12.7",
+    "pm2": "^2.7.1",
     "pug": "^2.0.0-rc.4"
   },
-  "devDependencies": {},
+  "devDependencies": {    
+    "nodemon": "*"},
   "scripts": {
     "test": "nodemon index.js",
-    "start": "nodemon index.js",
-    "pretest": "eslint ."
+    "start": "pm2 start index.js",
+    "poststop": "eslint .",
+    "stop": "pm2 stop all",
+    "pm2":"pm2"
   },
   "author": "Hanjun Chen",
   "license": "ISC"
