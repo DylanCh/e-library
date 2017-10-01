@@ -132,6 +132,7 @@ module.exports.deleteBook = (book)=>{
 var updateBook = (book,updatedBook) => {
     return new Promise((resolve, reject)=>{
       MongoClient.connect(localDB,(err,db)=>{
+          console.dir(updateBook);
         if(err){
           throw new Error('Cannot connect to database');
         }
@@ -141,7 +142,10 @@ var updateBook = (book,updatedBook) => {
               (err1,res)=>{
                 if(err1) 
                   resolve(false);
-                else resolve(true);
+                else {
+                    console.log(res.result.n);
+                    resolve(true);
+                }
                 db.close();
               }
           ); // end updateOne

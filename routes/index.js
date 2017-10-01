@@ -83,11 +83,11 @@ var editResults = (req, res) => {
               ${book.title}
             </h3>
           </div>
-          <ul class="list-group">
-            <li class="list-group-item">ISBN: ${book.ISBN}</li>
-            <li class="list-group-item">Author: ${book.author}</li>
-            <li class="list-group-item">Year: ${book.year}</li>
-            <li class="list-group-item">Publisher: ${book.publisher}</li>
+          <ul">
+            <li>ISBN: ${book.ISBN}</li>
+            <li>Author: ${book.author}</li>
+            <li>Year: ${book.year}</li>
+            <li>Publisher: ${book.publisher}</li>
           </ul>
         </div>
       `  : `Sorry, the book ${book.title} was not updated`;

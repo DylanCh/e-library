@@ -47,6 +47,10 @@ app.route(['/books/delete','/delete'])
 .post(routes.deleteRecord)
 .delete(routes.deleteRecord);
 
+app.get(['/tutorial','/tutorials'],(req,res)=>{
+    res.render('tutorial.pug');
+});
+
 app.listen(PORT,()=>{
     console.log('listening port ',PORT);
 });
